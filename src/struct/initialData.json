@@ -1,0 +1,24 @@
+{
+    "users": {
+      "USERID1": {
+        "name": "John Doe",
+        "email": "john.doe@example.com"
+      },
+      "USERID2": {
+        "name": "Jane Smith",
+        "email": "jane.smith@example.com"
+      }
+    },
+    "messages": {
+      "MESSAGEID1": {
+        "text": "Hello, how are you?",
+        "sender": "USERID1",
+        "timestamp": 1633024800000
+      },
+      "MESSAGEID2": {
+        "text": "I'm fine, thank you!",
+        "sender": "USERID2",
+        "timestamp": 1633024860000
+      }
+    }
+  }
