@@ -7,10 +7,29 @@
           dense
           round
         />
+        <q-btn
+          v-if="$route.fullPath.includes('/chat')"
+          @click="goBack"
+          icon="arrow_back"
+          flat
+          dense
+          label="Back"
+          />
 
-        <q-toolbar-title class="text-h6 flex flex-center">
+        <q-toolbar-title class="absolute-center">
           {{title}}
         </q-toolbar-title>
+
+        <q-btn
+          to="/login"
+          class="absolute-right"
+          icon="account_circle"
+          no-caps
+          flat
+          dense
+          label="Login"
+          />
+
       </q-toolbar>
     </q-header>
 
@@ -24,7 +43,7 @@
 </template>
 
 <script>
-import { openURL } from 'quasar';
+
 export default {
  computed: {
    title() {
@@ -37,12 +56,16 @@ export default {
       return 'Register';
     } else if (currentPath === '/login') {
       return 'Login';
+    } else if (currentPath === '/users') {
+      return 'User';
     } else {
       return 'Page Not Found';
     }
-   },
+   }
+  },
    methods: {
-    openURL
+    goBack() {
+      this.$router.go(-1);
     }
   }
 };
