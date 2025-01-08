@@ -15,11 +15,11 @@
 <script>
 import { defineComponent, ref, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
-import { database } from 'boot/firebase';
+import { database } from '../boot/firebase';
 import { ref as dbRef, onValue, push } from 'firebase/database';
 
 export default defineComponent({
-  name: 'PageChat',
+  name: 'PagePrivateChat',
   setup() {
     const route = useRoute();
     const messages = ref([]);
@@ -27,7 +27,7 @@ export default defineComponent({
     const userId = route.query.userId;
 
     onMounted(() => {
-      const messagesRef = dbRef(database, `chats/${userId}`);
+      const messagesRef = dbRef(database, `private-chats/${userId}`);
       onValue(messagesRef, (snapshot) => {
         const data = snapshot.val();
         messages.value = data ? Object.keys(data).map(key => ({ id: key, ...data[key] })) : [];
@@ -36,7 +36,7 @@ export default defineComponent({
 
     const sendMessage = async () => {
       if (newMessage.value.trim()) {
-        const messagesRef = dbRef(database, `chats/${userId}`);
+        const messagesRef = dbRef(database, `private-chats/${userId}`);
         await push(messagesRef, { text: newMessage.value });
         newMessage.value = '';
       }

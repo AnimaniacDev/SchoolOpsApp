@@ -7,6 +7,18 @@
       "USERID2": {
         "name": "Jane Smith",
         "email": "jane.smith@example.com"
+      },
+      "USERID3": {
+        "name": "Alice Johnson",
+        "email": "alice.johnson@example.com"
+      },
+      "USERID4": {
+        "name": "Bob Brown",
+        "email": "bob.brown@example.com"
+      },
+      "USERID5": {
+        "name": "Charlie Davis",
+        "email": "charlie.davis@example.com"
       }
     },
     "messages": {
@@ -19,6 +31,36 @@
         "text": "I'm fine, thank you!",
         "sender": "USERID2",
         "timestamp": 1633024860000
+      },
+      "MESSAGEID3": {
+        "text": "What are you up to?",
+        "sender": "USERID3",
+        "timestamp": 1633024920000
+      },
+      "MESSAGEID4": {
+        "text": "Just working on a project.",
+        "sender": "USERID4",
+        "timestamp": 1633024980000
+      },
+      "MESSAGEID5": {
+        "text": "Sounds interesting!",
+        "sender": "USERID5",
+        "timestamp": 1633025040000
+      },
+      "MESSAGEID6": {
+        "text": "Yes, it's quite challenging.",
+        "sender": "USERID1",
+        "timestamp": 1633025100000
+      },
+      "MESSAGEID7": {
+        "text": "Good luck with it!",
+        "sender": "USERID2",
+        "timestamp": 1633025160000
+      },
+      "MESSAGEID8": {
+        "text": "Thanks!",
+        "sender": "USERID3",
+        "timestamp": 1633025220000
       }
     }
   }

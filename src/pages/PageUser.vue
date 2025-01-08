@@ -1,7 +1,7 @@
 <template>
   <q-page class="q-pa-md">
     <q-list class="full-width" separator>
-      <q-item v-for="user in users" :key="user.id" to="/chat" class="q-my-sm" clickable v-ripple>
+      <q-item v-for="user in users" :key="user.id" class="q-my-sm" clickable v-ripple @click="startPrivateChat(user)">
         <q-item-section avatar>
           <q-avatar color="primary" text-color="white">
             {{ user.name.charAt(0) }}
@@ -19,65 +19,41 @@
         </q-item-section>
       </q-item>
     </q-list>
-    <q-footer elevated>
-      <q-toolbar>
-        <q-toolbar-title class="text-caption absolute-center">
-          © 2025 School Chat
-          <span><b>by Milivojevic and Farajollahi</b>
-          </span>
-        </q-toolbar-title>
-      </q-toolbar>
-
-    </q-footer>
   </q-page>
 </template>
 
 <script>
-  export default{
-    data() {
-      return{
-        users: [{
-          id: 1,
-          name: 'Jim',
-          online: true,
-        }, {
-          id: 2,
-          name: 'Pam',
-          online: false,
-        }, {
-          id: 3,
-          name: 'Dwight',
-          online: true,
-        }, {
-          id: 4,
-          name: 'Michael',
-          online: false,
-        }, {
-          id: 5,
-          name: 'Angela',
-          online: true,
-        }, {
-          id: 6,
-          name: 'Oscar',
-          online: false,
-        }, {
-          id: 7,
-          name: 'Kevin',
-          online: true,
-        }, {
-          id: 8,
-          name: 'Stanley',
-          online: false,
-        }, {
-          id: 9,
-          name: 'Phyllis',
-          online: true,
-        }, {
-          id: 10,
-          name: 'Meredith',
-          online: false,
-        }]
-      }
-    }
-  }
+import { defineComponent, ref, onMounted } from 'vue';
+import { useRouter } from 'vue-router';
+import { database } from '../boot/firebase';
+import { ref as dbRef, onValue } from 'firebase/database';
+
+export default defineComponent({
+  name: 'PageUser',
+  setup() {
+    const users = ref([]);
+    const router = useRouter();
+
+    onMounted(() => {
+      const usersRef = dbRef(database, 'users');
+      onValue(usersRef, (snapshot) => {
+        const data = snapshot.val();
+        users.value = data ? Object.keys(data).map(key => ({ id: key, ...data[key] })) : [];
+      });
+    });
+
+    const startPrivateChat = (user) => {
+      router.push({ path: '/private-chat', query: { userId: user.id } });
+    };
+
+    return {
+      users,
+      startPrivateChat,
+    };
+  },
+});
 </script>
+
+<style scoped>
+/* Add any styles you need hier */
+</style>
